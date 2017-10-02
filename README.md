@@ -1,2 +1,2 @@
 # SteamFriendsTagger
-A simple tool to tag friends on screenshots
+A simple tool to manually tag steam profiles on your screenshots
