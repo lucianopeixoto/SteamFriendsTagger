@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>566</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SFT - Steam Friends Tagger - v0.1</string>
   </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
@@ -19,16 +19,23 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>566</width>
      <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSFT_Steam_Friends_Tagger_v0_1">
     <property name="title">
-     <string>SFT - Steam Friends Tagger - v0.1</string>
+     <string>File</string>
+    </property>
+    <addaction name="actionAboute"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
     </property>
    </widget>
    <addaction name="menuSFT_Steam_Friends_Tagger_v0_1"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -39,6 +46,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAboute">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
