@@ -19,6 +19,8 @@ public:
 private slots:
     void on_pushButtonAbout_clicked();
 
+    void on_pushButtonRunTagFriend_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

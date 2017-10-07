@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -32,6 +33,12 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *pushButton;
+    QPushButton *pushButtonHelp;
+    QPushButton *pushButtonAbout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButtonRunTagFriend;
     QFormLayout *formLayout_2;
     QLabel *labelSreenshotFile;
     QHBoxLayout *horizontalLayout;
@@ -42,12 +49,9 @@ public:
     QLabel *labelSteamID64;
     QLineEdit *lineEditSteamID64;
     QLabel *labelLocation;
+    QHBoxLayout *horizontalLayout_3;
+    QCheckBox *checkBox;
     QLineEdit *lineEditLocation;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButtonAbout;
-    QPushButton *pushButtonHelp;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *pushButtonRunTagFriend;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -67,6 +71,46 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        horizontalLayout_2->addWidget(pushButton);
+
+        pushButtonHelp = new QPushButton(centralWidget);
+        pushButtonHelp->setObjectName(QStringLiteral("pushButtonHelp"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButtonHelp->sizePolicy().hasHeightForWidth());
+        pushButtonHelp->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(pushButtonHelp);
+
+        pushButtonAbout = new QPushButton(centralWidget);
+        pushButtonAbout->setObjectName(QStringLiteral("pushButtonAbout"));
+        sizePolicy1.setHeightForWidth(pushButtonAbout->sizePolicy().hasHeightForWidth());
+        pushButtonAbout->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(pushButtonAbout);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        pushButtonRunTagFriend = new QPushButton(centralWidget);
+        pushButtonRunTagFriend->setObjectName(QStringLiteral("pushButtonRunTagFriend"));
+        sizePolicy1.setHeightForWidth(pushButtonRunTagFriend->sizePolicy().hasHeightForWidth());
+        pushButtonRunTagFriend->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_2->addWidget(pushButtonRunTagFriend);
+
+
+        gridLayout->addLayout(horizontalLayout_2, 2, 1, 1, 1);
+
         formLayout_2 = new QFormLayout();
         formLayout_2->setSpacing(6);
         formLayout_2->setObjectName(QStringLiteral("formLayout_2"));
@@ -117,52 +161,32 @@ public:
 
         formLayout_2->setWidget(3, QFormLayout::LabelRole, labelLocation);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        checkBox = new QCheckBox(centralWidget);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+
+        horizontalLayout_3->addWidget(checkBox);
+
         lineEditLocation = new QLineEdit(centralWidget);
         lineEditLocation->setObjectName(QStringLiteral("lineEditLocation"));
+        lineEditLocation->setEnabled(false);
+        lineEditLocation->setClearButtonEnabled(false);
 
-        formLayout_2->setWidget(3, QFormLayout::FieldRole, lineEditLocation);
+        horizontalLayout_3->addWidget(lineEditLocation);
+
+
+        formLayout_2->setLayout(3, QFormLayout::FieldRole, horizontalLayout_3);
 
 
         gridLayout->addLayout(formLayout_2, 0, 1, 1, 1);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        pushButtonAbout = new QPushButton(centralWidget);
-        pushButtonAbout->setObjectName(QStringLiteral("pushButtonAbout"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButtonAbout->sizePolicy().hasHeightForWidth());
-        pushButtonAbout->setSizePolicy(sizePolicy1);
-
-        horizontalLayout_2->addWidget(pushButtonAbout);
-
-        pushButtonHelp = new QPushButton(centralWidget);
-        pushButtonHelp->setObjectName(QStringLiteral("pushButtonHelp"));
-        sizePolicy1.setHeightForWidth(pushButtonHelp->sizePolicy().hasHeightForWidth());
-        pushButtonHelp->setSizePolicy(sizePolicy1);
-
-        horizontalLayout_2->addWidget(pushButtonHelp);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
-        pushButtonRunTagFriend = new QPushButton(centralWidget);
-        pushButtonRunTagFriend->setObjectName(QStringLiteral("pushButtonRunTagFriend"));
-        sizePolicy1.setHeightForWidth(pushButtonRunTagFriend->sizePolicy().hasHeightForWidth());
-        pushButtonRunTagFriend->setSizePolicy(sizePolicy1);
-
-        horizontalLayout_2->addWidget(pushButtonRunTagFriend);
-
-
-        gridLayout->addLayout(horizontalLayout_2, 1, 1, 1, 1);
-
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
+        QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(close()));
+        QObject::connect(checkBox, SIGNAL(clicked(bool)), lineEditLocation, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -170,14 +194,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SFT - Steam Friends Tagger - v0.1", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Quit", Q_NULLPTR));
+        pushButtonHelp->setText(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
+        pushButtonAbout->setText(QApplication::translate("MainWindow", "About SFT", Q_NULLPTR));
+        pushButtonRunTagFriend->setText(QApplication::translate("MainWindow", "Tag Friend!", Q_NULLPTR));
         labelSreenshotFile->setText(QApplication::translate("MainWindow", "Screenshot File:", Q_NULLPTR));
         toolButtonOpenImageFile->setText(QApplication::translate("MainWindow", "...", Q_NULLPTR));
         labelSteamProfile->setText(QApplication::translate("MainWindow", "Steam User Profile:", Q_NULLPTR));
         labelSteamID64->setText(QApplication::translate("MainWindow", "Steam User ID64:", Q_NULLPTR));
         labelLocation->setText(QApplication::translate("MainWindow", "Location (Map):", Q_NULLPTR));
-        pushButtonAbout->setText(QApplication::translate("MainWindow", "About SFT", Q_NULLPTR));
-        pushButtonHelp->setText(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
-        pushButtonRunTagFriend->setText(QApplication::translate("MainWindow", "Tag Friend!", Q_NULLPTR));
+        checkBox->setText(QString());
     } // retranslateUi
 
 };
