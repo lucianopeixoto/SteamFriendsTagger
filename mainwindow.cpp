@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QMessageBox>
-#include <QDir>
-#include <QDebug>
-
 //#include <QListWidget>
 
 QString findSum(QString str1, QString str2);
