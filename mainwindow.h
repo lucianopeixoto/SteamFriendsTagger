@@ -21,8 +21,13 @@ private slots:
 
     void on_pushButtonRunTagFriend_clicked();
 
+    void on_toolButtonConfirmUserdataFolder_clicked();
+
+    void on_lineEditUserdataFolder_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
+    void OpenUserdataFolder();
 };
 
 #endif // MAINWINDOW_H

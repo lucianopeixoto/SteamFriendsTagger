@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -40,10 +41,6 @@ public:
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButtonRunTagFriend;
     QFormLayout *formLayout_2;
-    QLabel *labelSreenshotFile;
-    QHBoxLayout *horizontalLayout;
-    QLineEdit *lineEditImageFile;
-    QToolButton *toolButtonOpenImageFile;
     QLabel *labelSteamProfile;
     QLineEdit *lineEditSteamProfile;
     QLabel *labelSteamID64;
@@ -52,12 +49,18 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QCheckBox *checkBox;
     QLineEdit *lineEditLocation;
+    QLabel *labelYourProfile;
+    QComboBox *comboBoxUsers;
+    QLabel *labelSteamUserdataFolder;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *lineEditUserdataFolder;
+    QToolButton *toolButtonConfirmUserdataFolder;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(551, 151);
+        MainWindow->resize(404, 211);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -114,52 +117,30 @@ public:
         formLayout_2 = new QFormLayout();
         formLayout_2->setSpacing(6);
         formLayout_2->setObjectName(QStringLiteral("formLayout_2"));
-        labelSreenshotFile = new QLabel(centralWidget);
-        labelSreenshotFile->setObjectName(QStringLiteral("labelSreenshotFile"));
-
-        formLayout_2->setWidget(0, QFormLayout::LabelRole, labelSreenshotFile);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        lineEditImageFile = new QLineEdit(centralWidget);
-        lineEditImageFile->setObjectName(QStringLiteral("lineEditImageFile"));
-        lineEditImageFile->setMinimumSize(QSize(400, 0));
-
-        horizontalLayout->addWidget(lineEditImageFile);
-
-        toolButtonOpenImageFile = new QToolButton(centralWidget);
-        toolButtonOpenImageFile->setObjectName(QStringLiteral("toolButtonOpenImageFile"));
-
-        horizontalLayout->addWidget(toolButtonOpenImageFile);
-
-
-        formLayout_2->setLayout(0, QFormLayout::FieldRole, horizontalLayout);
-
         labelSteamProfile = new QLabel(centralWidget);
         labelSteamProfile->setObjectName(QStringLiteral("labelSteamProfile"));
 
-        formLayout_2->setWidget(1, QFormLayout::LabelRole, labelSteamProfile);
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, labelSteamProfile);
 
         lineEditSteamProfile = new QLineEdit(centralWidget);
         lineEditSteamProfile->setObjectName(QStringLiteral("lineEditSteamProfile"));
 
-        formLayout_2->setWidget(1, QFormLayout::FieldRole, lineEditSteamProfile);
+        formLayout_2->setWidget(5, QFormLayout::FieldRole, lineEditSteamProfile);
 
         labelSteamID64 = new QLabel(centralWidget);
         labelSteamID64->setObjectName(QStringLiteral("labelSteamID64"));
 
-        formLayout_2->setWidget(2, QFormLayout::LabelRole, labelSteamID64);
+        formLayout_2->setWidget(6, QFormLayout::LabelRole, labelSteamID64);
 
         lineEditSteamID64 = new QLineEdit(centralWidget);
         lineEditSteamID64->setObjectName(QStringLiteral("lineEditSteamID64"));
 
-        formLayout_2->setWidget(2, QFormLayout::FieldRole, lineEditSteamID64);
+        formLayout_2->setWidget(6, QFormLayout::FieldRole, lineEditSteamID64);
 
         labelLocation = new QLabel(centralWidget);
         labelLocation->setObjectName(QStringLiteral("labelLocation"));
 
-        formLayout_2->setWidget(3, QFormLayout::LabelRole, labelLocation);
+        formLayout_2->setWidget(7, QFormLayout::LabelRole, labelLocation);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -177,12 +158,60 @@ public:
         horizontalLayout_3->addWidget(lineEditLocation);
 
 
-        formLayout_2->setLayout(3, QFormLayout::FieldRole, horizontalLayout_3);
+        formLayout_2->setLayout(7, QFormLayout::FieldRole, horizontalLayout_3);
+
+        labelYourProfile = new QLabel(centralWidget);
+        labelYourProfile->setObjectName(QStringLiteral("labelYourProfile"));
+
+        formLayout_2->setWidget(3, QFormLayout::LabelRole, labelYourProfile);
+
+        comboBoxUsers = new QComboBox(centralWidget);
+        comboBoxUsers->setObjectName(QStringLiteral("comboBoxUsers"));
+
+        formLayout_2->setWidget(3, QFormLayout::FieldRole, comboBoxUsers);
+
+        labelSteamUserdataFolder = new QLabel(centralWidget);
+        labelSteamUserdataFolder->setObjectName(QStringLiteral("labelSteamUserdataFolder"));
+
+        formLayout_2->setWidget(1, QFormLayout::LabelRole, labelSteamUserdataFolder);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        lineEditUserdataFolder = new QLineEdit(centralWidget);
+        lineEditUserdataFolder->setObjectName(QStringLiteral("lineEditUserdataFolder"));
+        lineEditUserdataFolder->setMinimumSize(QSize(200, 0));
+
+        horizontalLayout->addWidget(lineEditUserdataFolder);
+
+        toolButtonConfirmUserdataFolder = new QToolButton(centralWidget);
+        toolButtonConfirmUserdataFolder->setObjectName(QStringLiteral("toolButtonConfirmUserdataFolder"));
+        toolButtonConfirmUserdataFolder->setEnabled(false);
+
+        horizontalLayout->addWidget(toolButtonConfirmUserdataFolder);
+
+
+        formLayout_2->setLayout(1, QFormLayout::FieldRole, horizontalLayout);
 
 
         gridLayout->addLayout(formLayout_2, 0, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
+#ifndef QT_NO_SHORTCUT
+        labelSteamProfile->setBuddy(lineEditSteamProfile);
+        labelSteamID64->setBuddy(lineEditSteamID64);
+        labelLocation->setBuddy(checkBox);
+        labelYourProfile->setBuddy(comboBoxUsers);
+        labelSteamUserdataFolder->setBuddy(lineEditUserdataFolder);
+#endif // QT_NO_SHORTCUT
+        QWidget::setTabOrder(comboBoxUsers, lineEditSteamProfile);
+        QWidget::setTabOrder(lineEditSteamProfile, lineEditSteamID64);
+        QWidget::setTabOrder(lineEditSteamID64, checkBox);
+        QWidget::setTabOrder(checkBox, lineEditLocation);
+        QWidget::setTabOrder(lineEditLocation, pushButtonRunTagFriend);
+        QWidget::setTabOrder(pushButtonRunTagFriend, pushButtonHelp);
+        QWidget::setTabOrder(pushButtonHelp, pushButtonAbout);
+        QWidget::setTabOrder(pushButtonAbout, pushButton);
 
         retranslateUi(MainWindow);
         QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(close()));
@@ -198,12 +227,14 @@ public:
         pushButtonHelp->setText(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
         pushButtonAbout->setText(QApplication::translate("MainWindow", "About SFT", Q_NULLPTR));
         pushButtonRunTagFriend->setText(QApplication::translate("MainWindow", "Tag Friend!", Q_NULLPTR));
-        labelSreenshotFile->setText(QApplication::translate("MainWindow", "Screenshot File:", Q_NULLPTR));
-        toolButtonOpenImageFile->setText(QApplication::translate("MainWindow", "...", Q_NULLPTR));
         labelSteamProfile->setText(QApplication::translate("MainWindow", "Steam User Profile:", Q_NULLPTR));
         labelSteamID64->setText(QApplication::translate("MainWindow", "Steam User ID64:", Q_NULLPTR));
         labelLocation->setText(QApplication::translate("MainWindow", "Location (Map):", Q_NULLPTR));
         checkBox->setText(QString());
+        labelYourProfile->setText(QApplication::translate("MainWindow", "Your Steam Profile", Q_NULLPTR));
+        labelSteamUserdataFolder->setText(QApplication::translate("MainWindow", "Steam  Folder:", Q_NULLPTR));
+        lineEditUserdataFolder->setText(QString());
+        toolButtonConfirmUserdataFolder->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

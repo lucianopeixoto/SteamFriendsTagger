@@ -9,15 +9,15 @@
 
 QString findSum(QString str1, QString str2);
 
+QDir userdataFolder("C:/");
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->lineEditImageFile->setText("C:/Program Files (x86)/Steam/userdata/66942368/760/remote/220/screenshots");
-    QDir imageFolder("C:/Program Files (x86)/Steam/userdata/66942368/760/remote/220/screenshots");
-    if (!imageFolder.exists()) QMessageBox::critical(this, "Folder not found!", "Steam's screenshot folder was not found.");
-
+    ui->lineEditUserdataFolder->setText("C:/Program Files (x86)/Steam/");
+    OpenUserdataFolder();
 }
 
 MainWindow::~MainWindow()
@@ -25,11 +25,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Display the about window
+// TODO: About window should be better implemented, with better layout and web links
 void MainWindow::on_pushButtonAbout_clicked()
 {
     QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v0.1\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
 }
 
+// Run the edit on the file for Tagging the desired friend
 void MainWindow::on_pushButtonRunTagFriend_clicked()
 {
     //unsigned long int steamId32 = (1 + ui->lineEditSteamProfile->text().toInt()); //descobrir como somar 64bits
@@ -89,4 +92,34 @@ QString findSum(QString str1, QString str2)
     std::reverse(str.begin(), str.end());
 
     return str;
+}
+
+// On confirm folder button clicked, update the userdata path. If folder is invalid, display message.
+
+void MainWindow::on_toolButtonConfirmUserdataFolder_clicked()
+{
+    OpenUserdataFolder();
+}
+
+// On text for the userdata path edited, enabke the "Confirm" button.
+
+void MainWindow::on_lineEditUserdataFolder_textEdited(const QString &arg1)
+{
+    ui->toolButtonConfirmUserdataFolder->setEnabled(1);
+}
+
+void MainWindow::OpenUserdataFolder(){
+    userdataFolder.setPath( ui->lineEditUserdataFolder->text()+"userdata/");
+    if (!userdataFolder.exists())
+        QMessageBox::critical(this, "Folder not found!", "Userdata folder was not found here.\nPlease fix it!");
+    else{
+        ui->toolButtonConfirmUserdataFolder->setDisabled(1);
+        // Preenchendo o combobox com a lista de usuários:
+        ui->comboBoxUsers->clear();
+        ui->comboBoxUsers->addItems(userdataFolder.entryList(QDir::Dirs));
+        ui->comboBoxUsers->setCurrentIndex(0);
+        ui->comboBoxUsers->removeItem(0);
+        ui->comboBoxUsers->removeItem(0);
+        qDebug() << ui->comboBoxUsers->itemText(0) << ui->comboBoxUsers->itemText(1) << ui->comboBoxUsers->itemText(2);
+    }
 }
