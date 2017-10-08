@@ -55,12 +55,16 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *lineEditUserdataFolder;
     QToolButton *toolButtonConfirmUserdataFolder;
+    QLabel *labelScreenshotFile;
+    QComboBox *comboBoxScreenshotFile;
+    QLabel *label;
+    QComboBox *comboBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(404, 211);
+        MainWindow->resize(404, 239);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -120,27 +124,28 @@ public:
         labelSteamProfile = new QLabel(centralWidget);
         labelSteamProfile->setObjectName(QStringLiteral("labelSteamProfile"));
 
-        formLayout_2->setWidget(5, QFormLayout::LabelRole, labelSteamProfile);
+        formLayout_2->setWidget(7, QFormLayout::LabelRole, labelSteamProfile);
 
         lineEditSteamProfile = new QLineEdit(centralWidget);
         lineEditSteamProfile->setObjectName(QStringLiteral("lineEditSteamProfile"));
 
-        formLayout_2->setWidget(5, QFormLayout::FieldRole, lineEditSteamProfile);
+        formLayout_2->setWidget(7, QFormLayout::FieldRole, lineEditSteamProfile);
 
         labelSteamID64 = new QLabel(centralWidget);
         labelSteamID64->setObjectName(QStringLiteral("labelSteamID64"));
 
-        formLayout_2->setWidget(6, QFormLayout::LabelRole, labelSteamID64);
+        formLayout_2->setWidget(8, QFormLayout::LabelRole, labelSteamID64);
 
         lineEditSteamID64 = new QLineEdit(centralWidget);
         lineEditSteamID64->setObjectName(QStringLiteral("lineEditSteamID64"));
+        lineEditSteamID64->setEnabled(false);
 
-        formLayout_2->setWidget(6, QFormLayout::FieldRole, lineEditSteamID64);
+        formLayout_2->setWidget(8, QFormLayout::FieldRole, lineEditSteamID64);
 
         labelLocation = new QLabel(centralWidget);
         labelLocation->setObjectName(QStringLiteral("labelLocation"));
 
-        formLayout_2->setWidget(7, QFormLayout::LabelRole, labelLocation);
+        formLayout_2->setWidget(9, QFormLayout::LabelRole, labelLocation);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -158,7 +163,7 @@ public:
         horizontalLayout_3->addWidget(lineEditLocation);
 
 
-        formLayout_2->setLayout(7, QFormLayout::FieldRole, horizontalLayout_3);
+        formLayout_2->setLayout(9, QFormLayout::FieldRole, horizontalLayout_3);
 
         labelYourProfile = new QLabel(centralWidget);
         labelYourProfile->setObjectName(QStringLiteral("labelYourProfile"));
@@ -193,6 +198,28 @@ public:
 
         formLayout_2->setLayout(1, QFormLayout::FieldRole, horizontalLayout);
 
+        labelScreenshotFile = new QLabel(centralWidget);
+        labelScreenshotFile->setObjectName(QStringLiteral("labelScreenshotFile"));
+
+        formLayout_2->setWidget(6, QFormLayout::LabelRole, labelScreenshotFile);
+
+        comboBoxScreenshotFile = new QComboBox(centralWidget);
+        comboBoxScreenshotFile->setObjectName(QStringLiteral("comboBoxScreenshotFile"));
+        comboBoxScreenshotFile->setEnabled(false);
+
+        formLayout_2->setWidget(6, QFormLayout::FieldRole, comboBoxScreenshotFile);
+
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, label);
+
+        comboBox = new QComboBox(centralWidget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        comboBox->setEnabled(false);
+
+        formLayout_2->setWidget(5, QFormLayout::FieldRole, comboBox);
+
 
         gridLayout->addLayout(formLayout_2, 0, 1, 1, 1);
 
@@ -222,19 +249,21 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SFT - Steam Friends Tagger - v0.1", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SFT - Steam Friends Tagger", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "Quit", Q_NULLPTR));
         pushButtonHelp->setText(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
         pushButtonAbout->setText(QApplication::translate("MainWindow", "About SFT", Q_NULLPTR));
         pushButtonRunTagFriend->setText(QApplication::translate("MainWindow", "Tag Friend!", Q_NULLPTR));
-        labelSteamProfile->setText(QApplication::translate("MainWindow", "Steam User Profile:", Q_NULLPTR));
-        labelSteamID64->setText(QApplication::translate("MainWindow", "Steam User ID64:", Q_NULLPTR));
+        labelSteamProfile->setText(QApplication::translate("MainWindow", "Friend Profile:", Q_NULLPTR));
+        labelSteamID64->setText(QApplication::translate("MainWindow", "Friend ID64:", Q_NULLPTR));
         labelLocation->setText(QApplication::translate("MainWindow", "Location (Map):", Q_NULLPTR));
         checkBox->setText(QString());
-        labelYourProfile->setText(QApplication::translate("MainWindow", "Your Steam Profile", Q_NULLPTR));
+        labelYourProfile->setText(QApplication::translate("MainWindow", "Your Profile:", Q_NULLPTR));
         labelSteamUserdataFolder->setText(QApplication::translate("MainWindow", "Steam  Folder:", Q_NULLPTR));
         lineEditUserdataFolder->setText(QString());
         toolButtonConfirmUserdataFolder->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
+        labelScreenshotFile->setText(QApplication::translate("MainWindow", "Screenshot:", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Game:", Q_NULLPTR));
     } // retranslateUi
 
 };

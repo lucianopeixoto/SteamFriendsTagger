@@ -5,6 +5,11 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QDebug>
+#include <QStringList>
+#include <QJsonValue>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +32,12 @@ private slots:
 
     void on_lineEditUserdataFolder_textEdited(const QString &arg1);
 
+    void on_comboBoxUsers_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
+    QStringList getGames(QFile* vdfFile);
 };
 
 #endif // MAINWINDOW_H

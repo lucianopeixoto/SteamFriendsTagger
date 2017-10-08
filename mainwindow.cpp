@@ -119,3 +119,35 @@ void MainWindow::OpenUserdataFolder(){
         qDebug() << ui->comboBoxUsers->itemText(0) << ui->comboBoxUsers->itemText(1) << ui->comboBoxUsers->itemText(2);
     }
 }
+
+QStringList MainWindow::getGames(QFile * vdfFile){
+    QStringList stringList;
+    QString lineRead;
+
+    while (!vdfFile->atEnd()){
+        lineRead = vdfFile->readLine();
+        // Remove all occurences of "\t" and "\n"
+        while (lineRead.indexOf("\t") != -1)
+            lineRead.remove(lineRead.indexOf("\t"), 2);
+        while (lineRead.indexOf("\n") != -1)
+            lineRead.remove(lineRead.indexOf("\n"), 2);
+        // Append at stringList
+        stringList.append(lineRead);
+    }
+    return stringList;
+}
+
+void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
+{
+    QFile vdfFile("C:/Users/lucia/OneDrive/Documentos/SteamFriendsTagger/SteamFriendsTagger/screenshots_test.vdf");
+    userdataFolder.setPath(ui->lineEditUserdataFolder->text()+"userdata/"+arg1+"/");
+    if (!userdataFolder.exists())
+        QMessageBox::critical(this, "Folder not found!", "Userdata \"" + arg1 +"\" folder was not found.\nUnable to continue.");
+    else{
+        qDebug() << userdataFolder.absolutePath();
+        if (!vdfFile.open(QIODevice::ReadOnly | QIODevice::Text))
+            QMessageBox::critical(this, "File not found!", "File was not found!");
+        qDebug() << getGames(&vdfFile);
+    }
+
+}

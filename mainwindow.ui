@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>404</width>
-    <height>211</height>
+    <height>239</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,7 +23,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>SFT - Steam Friends Tagger - v0.1</string>
+   <string>SFT - Steam Friends Tagger</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -95,33 +95,37 @@
     </item>
     <item row="0" column="1">
      <layout class="QFormLayout" name="formLayout_2">
-      <item row="5" column="0">
+      <item row="7" column="0">
        <widget class="QLabel" name="labelSteamProfile">
         <property name="text">
-         <string>Steam User Profile:</string>
+         <string>Friend Profile:</string>
         </property>
         <property name="buddy">
          <cstring>lineEditSteamProfile</cstring>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="7" column="1">
        <widget class="QLineEdit" name="lineEditSteamProfile"/>
       </item>
-      <item row="6" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="labelSteamID64">
         <property name="text">
-         <string>Steam User ID64:</string>
+         <string>Friend ID64:</string>
         </property>
         <property name="buddy">
          <cstring>lineEditSteamID64</cstring>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="lineEditSteamID64"/>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="lineEditSteamID64">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
-      <item row="7" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="labelLocation">
         <property name="text">
          <string>Location (Map):</string>
@@ -131,7 +135,7 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="9" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QCheckBox" name="checkBox">
@@ -155,7 +159,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="labelYourProfile">
         <property name="text">
-         <string>Your Steam Profile</string>
+         <string>Your Profile:</string>
         </property>
         <property name="buddy">
          <cstring>comboBoxUsers</cstring>
@@ -201,6 +205,34 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelScreenshotFile">
+        <property name="text">
+         <string>Screenshot:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QComboBox" name="comboBoxScreenshotFile">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Game:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="comboBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
