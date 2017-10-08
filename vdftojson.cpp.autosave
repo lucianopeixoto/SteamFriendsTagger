@@ -1,0 +1,12 @@
+#include "vdftojson.h"
+
+VdfToJson::VdfToJson()
+{
+    return QJsonDocument jsonDocument = QJsonDocument(QJsonDocument());
+}
+
+VdfToJson::VdfToJson(QFile vdfFile)
+{
+
+    return QJsonDocument jsonDocument;
+}
