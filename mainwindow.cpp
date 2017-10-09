@@ -10,6 +10,9 @@ QDir userdataFolder760("C:/");
 QDir userdataFolderRemote("C:/");
 QDir userdataFolderGame("C:/");
 
+QFile vdfFileGlobal("");
+QString vdfFileString;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -117,7 +120,7 @@ void MainWindow::OpenUserdataFolder(){
     else{
         qDebug() << "Userdata: " << userdataFolder.absolutePath();
         ui->toolButtonConfirmUserdataFolder->setDisabled(1);
-        // Preenchendo o combobox com a lista de usuários:
+        // Filling the combobox with users:
         ui->comboBoxUsers->setEnabled(1);
         ui->comboBoxUsers->clear();
         ui->comboBoxUsers->addItems(userdataFolder.entryList(QDir::Dirs));
@@ -127,21 +130,42 @@ void MainWindow::OpenUserdataFolder(){
     }
 }
 
-QStringList MainWindow::getGames(QFile * vdfFile){
-    QStringList stringList;
-    QString vdfFileString;
-    QTextStream vdfStream(vdfFile);
+// TODO: Get the location name for the selected screenshot from screenshots.vdf
+QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile){
+    qDebug() << "getLocation of screenshot " << screenshotFile << " from file " << vdfFileGlobal.fileName();
+    QString screenshotVdfString = "";
+    QString location = "Map Name";
 
-    vdfFileString = vdfStream.readAll();
+    // location = vdfStringLocal->mid(738, 9); // de_mirage example test
 
-    qDebug() << "File String:\n" << vdfFileString;
-    while (vdfFileString.indexOf("\t") != -1)
-            vdfFileString.remove(vdfFileString.indexOf("\t"), 2);
+    // Gets only the selected screenshot related information:
+    screenshotVdfString = vdfStringLocal->mid(
+                vdfStringLocal->lastIndexOf("\n\t\t{\n", vdfStringLocal->indexOf(screenshotFile)),
+                vdfStringLocal->indexOf("\n\t\t}\n") + 7);
+    qDebug() << "Screenshot to VDF:\n" << screenshotVdfString;
 
-    qDebug() << "File String Without \\t:\n" << vdfFileString;
-    return stringList;
+    // If there's a location parameter, get's it, if not, set to the game ID
+    // TODO: Make it set to the game name when available
+    if (screenshotVdfString.indexOf("\"location\"", 0 , Qt::CaseInsensitive) != -1){
+        // Searshes for a "location" and gets the text after "\t\t\""
+        location = screenshotVdfString.mid(
+                        screenshotVdfString.indexOf("\t\t\"", screenshotVdfString.indexOf("\"location\"", 0 , Qt::CaseInsensitive)) + 3
+                    );
+        // Truncates at "\"\n"
+        location.truncate(location.indexOf("\"\n"));
+        ui->checkBox->setChecked(0);
+        ui->lineEditLocation->setDisabled(1);
+    }
+    else{
+        location = ui->comboBoxGame->currentText();
+        ui->checkBox->setChecked(1);
+        ui->lineEditLocation->setEnabled(1);
+    }
+
+    return location;
 }
 
+// TODO: Load games names using SteamAPI, other site or a local text file with most games
 void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
 {
     if (arg1 != "." && arg1 != ".." && arg1 != ""){
@@ -153,10 +177,18 @@ void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
         }
         else{
             qDebug() << "760: " + userdataFolder760.absolutePath();
-            QFile vdfFile(userdataFolder760.absoluteFilePath("screenshots.vdf"));
-            if (!vdfFile.open(QIODevice::ReadWrite | QIODevice::Text))
+
+            vdfFileGlobal.close();
+            vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
+            if (!vdfFileGlobal.open(QIODevice::ReadWrite | QIODevice::Text))
                 QMessageBox::critical(this, "File not found!", "File was not found!");
-            //qDebug() << getGames(&vdfFile);
+            else{
+                QTextStream vdfFileStream(&vdfFileGlobal);
+                vdfFileString = vdfFileStream.readAll();
+                qDebug() << vdfFileString;
+            }
+            vdfFileGlobal.close();
+
             userdataFolderRemote.setPath(userdataFolder760.absolutePath() + "/remote/");
             if (!userdataFolderRemote.exists()){
                 QMessageBox::critical(this, "Folder not found!", "Remote folder not found at\"" + arg1 +"/760/\" folder was not found.\nUnable to continue.");
@@ -178,6 +210,7 @@ void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
     }
 }
 
+// TODO: Show screenshots thumbnails
 void MainWindow::on_comboBoxGame_currentIndexChanged(const QString &arg1)
 {
     if (arg1 != "." && arg1 != ".." && arg1 != ""){
@@ -189,10 +222,20 @@ void MainWindow::on_comboBoxGame_currentIndexChanged(const QString &arg1)
         }
         else{
             qDebug() << "Game: " << userdataFolderGame.absolutePath();
-            ui->comboBoxScreenshotFile->setEnabled(1);
             ui->comboBoxScreenshotFile->clear();
             ui->comboBoxScreenshotFile->addItems(userdataFolderGame.entryList(QDir::Files));
             ui->comboBoxScreenshotFile->setCurrentIndex(0);
+            ui->comboBoxScreenshotFile->setEnabled(1);
         }
     }
+    else {
+        ui->comboBoxScreenshotFile->setDisabled(1);
+        ui->comboBoxScreenshotFile->clear();
+    }
+}
+
+void MainWindow::on_comboBoxScreenshotFile_currentIndexChanged(const QString &arg1)
+{
+    qDebug() << getLocation(&vdfFileString, arg1);
+    ui->lineEditLocation->setText(getLocation(&vdfFileString, arg1));
 }

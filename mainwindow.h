@@ -36,10 +36,12 @@ private slots:
 
     void on_comboBoxGame_currentIndexChanged(const QString &arg1);
 
+    void on_comboBoxScreenshotFile_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
-    QStringList getGames(QFile* vdfFile);
+    QString getLocation(QString* vdfStringLocal, QString screenshotFile);
 };
 
 #endif // MAINWINDOW_H
