@@ -6,6 +6,9 @@
 QString findSum(QString str1, QString str2);
 
 QDir userdataFolder("C:/");
+QDir userdataFolder760("C:/");
+QDir userdataFolderRemote("C:/");
+QDir userdataFolderGame("C:/");
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -106,48 +109,90 @@ void MainWindow::on_lineEditUserdataFolder_textEdited(const QString &arg1)
 
 void MainWindow::OpenUserdataFolder(){
     userdataFolder.setPath( ui->lineEditUserdataFolder->text()+"userdata/");
-    if (!userdataFolder.exists())
+    if (!userdataFolder.exists()){
         QMessageBox::critical(this, "Folder not found!", "Userdata folder was not found here.\nPlease fix it!");
+        ui->comboBoxUsers->clear();
+        ui->comboBoxUsers->setDisabled(1);
+    }
     else{
+        qDebug() << "Userdata: " << userdataFolder.absolutePath();
         ui->toolButtonConfirmUserdataFolder->setDisabled(1);
         // Preenchendo o combobox com a lista de usuários:
+        ui->comboBoxUsers->setEnabled(1);
         ui->comboBoxUsers->clear();
         ui->comboBoxUsers->addItems(userdataFolder.entryList(QDir::Dirs));
         ui->comboBoxUsers->setCurrentIndex(0);
         ui->comboBoxUsers->removeItem(0);
         ui->comboBoxUsers->removeItem(0);
-        qDebug() << ui->comboBoxUsers->itemText(0) << ui->comboBoxUsers->itemText(1) << ui->comboBoxUsers->itemText(2);
     }
 }
 
 QStringList MainWindow::getGames(QFile * vdfFile){
     QStringList stringList;
-    QString lineRead;
+    QString vdfFileString;
+    QTextStream vdfStream(vdfFile);
 
-    while (!vdfFile->atEnd()){
-        lineRead = vdfFile->readLine();
-        // Remove all occurences of "\t" and "\n"
-        while (lineRead.indexOf("\t") != -1)
-            lineRead.remove(lineRead.indexOf("\t"), 2);
-        while (lineRead.indexOf("\n") != -1)
-            lineRead.remove(lineRead.indexOf("\n"), 2);
-        // Append at stringList
-        stringList.append(lineRead);
-    }
+    vdfFileString = vdfStream.readAll();
+
+    qDebug() << "File String:\n" << vdfFileString;
+    while (vdfFileString.indexOf("\t") != -1)
+            vdfFileString.remove(vdfFileString.indexOf("\t"), 2);
+
+    qDebug() << "File String Without \\t:\n" << vdfFileString;
     return stringList;
 }
 
 void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
 {
-    QFile vdfFile("C:/Users/lucia/OneDrive/Documentos/SteamFriendsTagger/SteamFriendsTagger/screenshots_test.vdf");
-    userdataFolder.setPath(ui->lineEditUserdataFolder->text()+"userdata/"+arg1+"/");
-    if (!userdataFolder.exists())
-        QMessageBox::critical(this, "Folder not found!", "Userdata \"" + arg1 +"\" folder was not found.\nUnable to continue.");
-    else{
-        qDebug() << userdataFolder.absolutePath();
-        if (!vdfFile.open(QIODevice::ReadOnly | QIODevice::Text))
-            QMessageBox::critical(this, "File not found!", "File was not found!");
-        qDebug() << getGames(&vdfFile);
+    if (arg1 != "." && arg1 != ".." && arg1 != ""){
+        userdataFolder760.setPath(userdataFolder.absolutePath() + "/" + arg1 + "/760/");
+        if (!userdataFolder760.exists()){
+            QMessageBox::critical(this, "Folder not found!", "Userdata \"" + arg1 +"/760/\" folder was not found.\nUnable to continue.");
+            ui->comboBoxGame->setDisabled(1);
+            ui->comboBoxGame->clear();
+        }
+        else{
+            qDebug() << "760: " + userdataFolder760.absolutePath();
+            QFile vdfFile(userdataFolder760.absoluteFilePath("screenshots.vdf"));
+            if (!vdfFile.open(QIODevice::ReadWrite | QIODevice::Text))
+                QMessageBox::critical(this, "File not found!", "File was not found!");
+            //qDebug() << getGames(&vdfFile);
+            userdataFolderRemote.setPath(userdataFolder760.absolutePath() + "/remote/");
+            if (!userdataFolderRemote.exists()){
+                QMessageBox::critical(this, "Folder not found!", "Remote folder not found at\"" + arg1 +"/760/\" folder was not found.\nUnable to continue.");
+                ui->comboBoxGame->setDisabled(1);
+                ui->comboBoxGame->clear();
+                ui->comboBoxScreenshotFile->setDisabled(1);
+                ui->comboBoxScreenshotFile->clear();
+            }
+            else{
+                qDebug() << "Remote: " << userdataFolderRemote.absolutePath();
+                ui->comboBoxGame->setEnabled(1);
+                ui->comboBoxGame->clear();
+                ui->comboBoxGame->addItems(userdataFolderRemote.entryList(QDir::Dirs));
+                ui->comboBoxGame->setCurrentIndex(0);
+                ui->comboBoxGame->removeItem(0);
+                ui->comboBoxGame->removeItem(0);
+            }
+        }
     }
+}
 
+void MainWindow::on_comboBoxGame_currentIndexChanged(const QString &arg1)
+{
+    if (arg1 != "." && arg1 != ".." && arg1 != ""){
+        userdataFolderGame.setPath(userdataFolderRemote.absolutePath() + "/" + arg1 + "/screenshots");
+        if (!userdataFolderGame.exists()){
+            QMessageBox::critical(this, "Folder not found!", "This game folder was not found.\nUnable to continue.");
+            ui->comboBoxScreenshotFile->setDisabled(1);
+            ui->comboBoxScreenshotFile->clear();
+        }
+        else{
+            qDebug() << "Game: " << userdataFolderGame.absolutePath();
+            ui->comboBoxScreenshotFile->setEnabled(1);
+            ui->comboBoxScreenshotFile->clear();
+            ui->comboBoxScreenshotFile->addItems(userdataFolderGame.entryList(QDir::Files));
+            ui->comboBoxScreenshotFile->setCurrentIndex(0);
+        }
+    }
 }

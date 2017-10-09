@@ -57,14 +57,14 @@ public:
     QToolButton *toolButtonConfirmUserdataFolder;
     QLabel *labelScreenshotFile;
     QComboBox *comboBoxScreenshotFile;
-    QLabel *label;
-    QComboBox *comboBox;
+    QLabel *labelGame;
+    QComboBox *comboBoxGame;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(404, 239);
+        MainWindow->resize(404, 261);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -209,16 +209,16 @@ public:
 
         formLayout_2->setWidget(6, QFormLayout::FieldRole, comboBoxScreenshotFile);
 
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
+        labelGame = new QLabel(centralWidget);
+        labelGame->setObjectName(QStringLiteral("labelGame"));
 
-        formLayout_2->setWidget(5, QFormLayout::LabelRole, label);
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, labelGame);
 
-        comboBox = new QComboBox(centralWidget);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setEnabled(false);
+        comboBoxGame = new QComboBox(centralWidget);
+        comboBoxGame->setObjectName(QStringLiteral("comboBoxGame"));
+        comboBoxGame->setEnabled(false);
 
-        formLayout_2->setWidget(5, QFormLayout::FieldRole, comboBox);
+        formLayout_2->setWidget(5, QFormLayout::FieldRole, comboBoxGame);
 
 
         gridLayout->addLayout(formLayout_2, 0, 1, 1, 1);
@@ -263,7 +263,7 @@ public:
         lineEditUserdataFolder->setText(QString());
         toolButtonConfirmUserdataFolder->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
         labelScreenshotFile->setText(QApplication::translate("MainWindow", "Screenshot:", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "Game:", Q_NULLPTR));
+        labelGame->setText(QApplication::translate("MainWindow", "Game:", Q_NULLPTR));
     } // retranslateUi
 
 };

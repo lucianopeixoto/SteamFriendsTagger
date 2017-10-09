@@ -34,6 +34,8 @@ private slots:
 
     void on_comboBoxUsers_currentIndexChanged(const QString &arg1);
 
+    void on_comboBoxGame_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
