@@ -116,6 +116,10 @@ void MainWindow::OpenUserdataFolder(){
         QMessageBox::critical(this, "Folder not found!", "Userdata folder was not found here.\nPlease fix it!");
         ui->comboBoxUsers->clear();
         ui->comboBoxUsers->setDisabled(1);
+        ui->comboBoxGame->clear();
+        ui->comboBoxGame->setDisabled(1);
+        ui->comboBoxGame->clear();
+        ui->comboBoxScreenshotFile->setDisabled(1);
     }
     else{
         qDebug() << "Userdata: " << userdataFolder.absolutePath();
