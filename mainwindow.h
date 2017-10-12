@@ -42,6 +42,7 @@ private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
     QString getLocation(QString* vdfStringLocal, QString screenshotFile);
+    void WriteScreenshotString(QFile* vdfFileLocal, QString vdfStringLocal);
 };
 
 #endif // MAINWINDOW_H
