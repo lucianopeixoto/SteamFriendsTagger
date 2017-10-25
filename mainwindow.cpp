@@ -121,6 +121,11 @@ void MainWindow::OpenUserdataFolder(){
         ui->comboBoxGame->setDisabled(1);
         ui->comboBoxGame->clear();
         ui->comboBoxScreenshotFile->setDisabled(1);
+        ui->lineEditLocation->clear();
+        ui->lineEditLocation->setDisabled(1);
+        ui->lineEditSteamProfile->clear();
+        ui->lineEditSteamProfile->setDisabled(1);
+        ui->checkBoxLocationEdit->setDisabled(1);
     }
     else{
         qDebug() << "Userdata: " << userdataFolder.absolutePath();
@@ -151,6 +156,7 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
 
     // If there's a location parameter, get's it, if not, set to the game ID
     // TODO: Make it set to the game name when available
+    ui->checkBoxLocationEdit->setEnabled(1);
     if (screenshotVdfString.indexOf("\"location\"", 0 , Qt::CaseInsensitive) != -1){
         // Searshes for a "location" and gets the text after "\t\t\""
         location = screenshotVdfString.mid(
@@ -158,19 +164,19 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
                     );
         // Truncates at "\"\n"
         location.truncate(location.indexOf("\"\n"));
-        ui->checkBox->setChecked(0);
+        ui->checkBoxLocationEdit->setChecked(0);
         ui->lineEditLocation->setDisabled(1);
     }
     else{
         location = ui->comboBoxGame->currentText();
-        ui->checkBox->setChecked(1);
+        ui->checkBoxLocationEdit->setChecked(1);
         ui->lineEditLocation->setEnabled(1);
     }
 
     return location;
 }
 
-void MainWindow::WriteScreenshotString(QFile *vdfFileLocal, QString vdfStringLocal)
+void MainWindow::writeScreenshotString(QFile *vdfFileLocal, QString vdfStringLocal)
 {
     vdfFileGlobal.close();
     vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
@@ -265,6 +271,26 @@ void MainWindow::on_comboBoxScreenshotFile_currentIndexChanged(const QString &ar
     QPixmap screenshotPreviewPixmap(screenshotPreviewPath);
     ui->labelImagePreviewPixel->setPixmap(screenshotPreviewPixmap.scaled(500, 500, Qt::KeepAspectRatio));
     ui->lineEditLocation->setText(getLocation(&vdfFileString, arg1));
+
+    ui ->lineEditSteamProfile->setEnabled(1);
 }
 
 
+
+void MainWindow::on_checkBoxLocationEdit_clicked(bool checked)
+{
+    if (checked == true){
+        if (ui->comboBoxScreenshotFile->currentText().length() > 1){
+            ui->lineEditLocation->setEnabled(true);
+        } else
+            ui->lineEditLocation->setDisabled(true);
+    } else
+        ui->lineEditLocation->setDisabled(true);
+}
+
+void MainWindow::on_lineEditSteamProfile_textChanged(const QString &arg1)
+{
+    QString steamId64;
+    steamId64 = findSum(arg1, "76561197960265728");
+    ui->lineEditSteamID64->setText(steamId64);
+}

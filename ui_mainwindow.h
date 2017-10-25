@@ -47,7 +47,7 @@ public:
     QLineEdit *lineEditSteamID64;
     QLabel *labelLocation;
     QHBoxLayout *horizontalLayout_3;
-    QCheckBox *checkBox;
+    QCheckBox *checkBoxLocationEdit;
     QLineEdit *lineEditLocation;
     QLabel *labelYourProfile;
     QComboBox *comboBoxUsers;
@@ -112,6 +112,7 @@ public:
 
         pushButtonRunTagFriend = new QPushButton(centralWidget);
         pushButtonRunTagFriend->setObjectName(QStringLiteral("pushButtonRunTagFriend"));
+        pushButtonRunTagFriend->setEnabled(false);
         sizePolicy1.setHeightForWidth(pushButtonRunTagFriend->sizePolicy().hasHeightForWidth());
         pushButtonRunTagFriend->setSizePolicy(sizePolicy1);
 
@@ -130,6 +131,7 @@ public:
 
         lineEditSteamProfile = new QLineEdit(centralWidget);
         lineEditSteamProfile->setObjectName(QStringLiteral("lineEditSteamProfile"));
+        lineEditSteamProfile->setEnabled(false);
 
         formLayout_2->setWidget(7, QFormLayout::FieldRole, lineEditSteamProfile);
 
@@ -152,10 +154,10 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        checkBox = new QCheckBox(centralWidget);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
+        checkBoxLocationEdit = new QCheckBox(centralWidget);
+        checkBoxLocationEdit->setObjectName(QStringLiteral("checkBoxLocationEdit"));
 
-        horizontalLayout_3->addWidget(checkBox);
+        horizontalLayout_3->addWidget(checkBoxLocationEdit);
 
         lineEditLocation = new QLineEdit(centralWidget);
         lineEditLocation->setObjectName(QStringLiteral("lineEditLocation"));
@@ -236,14 +238,14 @@ public:
 #ifndef QT_NO_SHORTCUT
         labelSteamProfile->setBuddy(lineEditSteamProfile);
         labelSteamID64->setBuddy(lineEditSteamID64);
-        labelLocation->setBuddy(checkBox);
+        labelLocation->setBuddy(checkBoxLocationEdit);
         labelYourProfile->setBuddy(comboBoxUsers);
         labelSteamUserdataFolder->setBuddy(lineEditUserdataFolder);
 #endif // QT_NO_SHORTCUT
         QWidget::setTabOrder(comboBoxUsers, lineEditSteamProfile);
         QWidget::setTabOrder(lineEditSteamProfile, lineEditSteamID64);
-        QWidget::setTabOrder(lineEditSteamID64, checkBox);
-        QWidget::setTabOrder(checkBox, lineEditLocation);
+        QWidget::setTabOrder(lineEditSteamID64, checkBoxLocationEdit);
+        QWidget::setTabOrder(checkBoxLocationEdit, lineEditLocation);
         QWidget::setTabOrder(lineEditLocation, pushButtonRunTagFriend);
         QWidget::setTabOrder(pushButtonRunTagFriend, pushButtonHelp);
         QWidget::setTabOrder(pushButtonHelp, pushButtonAbout);
@@ -251,7 +253,6 @@ public:
 
         retranslateUi(MainWindow);
         QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(close()));
-        QObject::connect(checkBox, SIGNAL(clicked(bool)), lineEditLocation, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -266,7 +267,7 @@ public:
         labelSteamProfile->setText(QApplication::translate("MainWindow", "Friend Profile:", Q_NULLPTR));
         labelSteamID64->setText(QApplication::translate("MainWindow", "Friend ID64:", Q_NULLPTR));
         labelLocation->setText(QApplication::translate("MainWindow", "Location (Map):", Q_NULLPTR));
-        checkBox->setText(QString());
+        checkBoxLocationEdit->setText(QString());
         labelYourProfile->setText(QApplication::translate("MainWindow", "Your Profile:", Q_NULLPTR));
         labelSteamUserdataFolder->setText(QApplication::translate("MainWindow", "Steam  Folder:", Q_NULLPTR));
         lineEditUserdataFolder->setText(QString());

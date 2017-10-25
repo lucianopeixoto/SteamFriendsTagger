@@ -86,6 +86,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonRunTagFriend">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -112,7 +115,11 @@
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QLineEdit" name="lineEditSteamProfile"/>
+       <widget class="QLineEdit" name="lineEditSteamProfile">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="8" column="0">
        <widget class="QLabel" name="labelSteamID64">
@@ -137,14 +144,14 @@
          <string>Location (Map):</string>
         </property>
         <property name="buddy">
-         <cstring>checkBox</cstring>
+         <cstring>checkBoxLocationEdit</cstring>
         </property>
        </widget>
       </item>
       <item row="9" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="checkBoxLocationEdit">
           <property name="text">
            <string/>
           </property>
@@ -266,7 +273,7 @@
   <tabstop>comboBoxUsers</tabstop>
   <tabstop>lineEditSteamProfile</tabstop>
   <tabstop>lineEditSteamID64</tabstop>
-  <tabstop>checkBox</tabstop>
+  <tabstop>checkBoxLocationEdit</tabstop>
   <tabstop>lineEditLocation</tabstop>
   <tabstop>pushButtonRunTagFriend</tabstop>
   <tabstop>pushButtonHelp</tabstop>
@@ -282,28 +289,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>49</x>
-     <y>138</y>
+     <x>59</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
-     <x>69</x>
-     <y>145</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBox</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>lineEditLocation</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>115</x>
-     <y>99</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>146</x>
-     <y>99</y>
+     <x>103</x>
+     <y>391</y>
     </hint>
    </hints>
   </connection>

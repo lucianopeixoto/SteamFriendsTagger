@@ -38,11 +38,15 @@ private slots:
 
     void on_comboBoxScreenshotFile_currentIndexChanged(const QString &arg1);
 
+    void on_checkBoxLocationEdit_clicked(bool checked);
+
+    void on_lineEditSteamProfile_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
     QString getLocation(QString* vdfStringLocal, QString screenshotFile);
-    void WriteScreenshotString(QFile* vdfFileLocal, QString vdfStringLocal);
+    void writeScreenshotString(QFile* vdfFileLocal, QString vdfStringLocal);
 };
 
 #endif // MAINWINDOW_H
