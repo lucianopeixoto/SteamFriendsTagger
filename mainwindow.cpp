@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     ui->lineEditUserdataFolder->setText("C:/Program Files (x86)/Steam/");
     OpenUserdataFolder();
 }
@@ -169,6 +170,21 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
     return location;
 }
 
+void MainWindow::WriteScreenshotString(QFile *vdfFileLocal, QString vdfStringLocal)
+{
+    vdfFileGlobal.close();
+    vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
+    if (!vdfFileGlobal.open(QIODevice::ReadWrite | QIODevice::Text))
+        QMessageBox::critical(this, "File not found!", "File was not found!");
+    else{
+        QTextStream vdfFileStream(&vdfFileGlobal);
+        vdfFileString = vdfFileStream.readAll();
+        qDebug() << vdfFileString;
+    }
+    vdfFileGlobal.close();
+
+}
+
 // TODO: Load games names using SteamAPI, other site or a local text file with most games
 void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
 {
@@ -238,8 +254,17 @@ void MainWindow::on_comboBoxGame_currentIndexChanged(const QString &arg1)
     }
 }
 
+// When changing selected screenshot file, load the "map location" and the image preview
 void MainWindow::on_comboBoxScreenshotFile_currentIndexChanged(const QString &arg1)
 {
     qDebug() << getLocation(&vdfFileString, arg1);
+
+    QString screenshotPreviewPath;
+    screenshotPreviewPath = ui->lineEditUserdataFolder->text() + "userdata/" + ui->comboBoxUsers->currentText() + "/760/remote/" + ui->comboBoxGame->currentText() + "/screenshots/" + arg1;
+    qDebug() << "Screenshot Preview: " << screenshotPreviewPath;
+    QPixmap screenshotPreviewPixmap(screenshotPreviewPath);
+    ui->labelImagePreviewPixel->setPixmap(screenshotPreviewPixmap.scaled(500, 500, Qt::KeepAspectRatio));
     ui->lineEditLocation->setText(getLocation(&vdfFileString, arg1));
 }
+
+

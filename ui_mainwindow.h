@@ -59,17 +59,19 @@ public:
     QComboBox *comboBoxScreenshotFile;
     QLabel *labelGame;
     QComboBox *comboBoxGame;
+    QLabel *labelImagePreviewPixel;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(404, 261);
+        MainWindow->resize(404, 467);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
+        MainWindow->setMaximumSize(QSize(404, 467));
         MainWindow->setCursor(QCursor(Qt::ArrowCursor));
         MainWindow->setContextMenuPolicy(Qt::NoContextMenu);
         centralWidget = new QWidget(MainWindow);
@@ -116,7 +118,7 @@ public:
         horizontalLayout_2->addWidget(pushButtonRunTagFriend);
 
 
-        gridLayout->addLayout(horizontalLayout_2, 2, 1, 1, 1);
+        gridLayout->addLayout(horizontalLayout_2, 4, 1, 1, 1);
 
         formLayout_2 = new QFormLayout();
         formLayout_2->setSpacing(6);
@@ -221,7 +223,14 @@ public:
         formLayout_2->setWidget(5, QFormLayout::FieldRole, comboBoxGame);
 
 
-        gridLayout->addLayout(formLayout_2, 0, 1, 1, 1);
+        gridLayout->addLayout(formLayout_2, 2, 1, 1, 1);
+
+        labelImagePreviewPixel = new QLabel(centralWidget);
+        labelImagePreviewPixel->setObjectName(QStringLiteral("labelImagePreviewPixel"));
+        labelImagePreviewPixel->setMinimumSize(QSize(0, 0));
+        labelImagePreviewPixel->setScaledContents(false);
+
+        gridLayout->addWidget(labelImagePreviewPixel, 3, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
 #ifndef QT_NO_SHORTCUT
@@ -264,6 +273,7 @@ public:
         toolButtonConfirmUserdataFolder->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
         labelScreenshotFile->setText(QApplication::translate("MainWindow", "Screenshot:", Q_NULLPTR));
         labelGame->setText(QApplication::translate("MainWindow", "Game:", Q_NULLPTR));
+        labelImagePreviewPixel->setText(QString());
     } // retranslateUi
 
 };
