@@ -33,13 +33,228 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="1">
+    <item row="8" column="1">
+     <layout class="QFormLayout" name="formLayoutMainForm">
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelSteamUserdataFolder">
+        <property name="text">
+         <string>Steam  Folder:</string>
+        </property>
+        <property name="buddy">
+         <cstring>lineEditUserdataFolder</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayoutFolder">
+        <item>
+         <widget class="QLineEdit" name="lineEditUserdataFolder">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButtonConfirmUserdataFolder">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>OK</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="labelYourProfile">
+        <property name="text">
+         <string>Your Profile:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxUsers</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="comboBoxUsers"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="labelGame">
+        <property name="text">
+         <string>Game:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxGame</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="comboBoxGame">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelScreenshotFile">
+        <property name="text">
+         <string>Screenshot:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxScreenshotFile</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QComboBox" name="comboBoxScreenshotFile">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="labelSteamProfile">
+        <property name="text">
+         <string>Tag Friend:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxFriend</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QRadioButton" name="radioButtonFriend">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxFriend">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tag Steam ID:</string>
+        </property>
+        <property name="buddy">
+         <cstring>lineEditSteamProfile</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="labelSteamID64">
+        <property name="text">
+         <string>Tag ID64:</string>
+        </property>
+        <property name="buddy">
+         <cstring>lineEditSteamID64</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QLabel" name="labelLocation">
+        <property name="text">
+         <string>Location (Map):</string>
+        </property>
+        <property name="buddy">
+         <cstring>checkBoxLocationEdit</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayoutLocation">
+        <item>
+         <widget class="QCheckBox" name="checkBoxLocationEdit">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditLocation">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="9" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QRadioButton" name="radioButtonSteamProfile">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditSteamProfile">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QRadioButton" name="radioButtonSteamID64">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditSteamID64">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="10" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButtonQuit">
         <property name="text">
          <string>Quit</string>
         </property>
@@ -102,154 +317,7 @@
       </item>
      </layout>
     </item>
-    <item row="2" column="1">
-     <layout class="QFormLayout" name="formLayout_2">
-      <item row="7" column="0">
-       <widget class="QLabel" name="labelSteamProfile">
-        <property name="text">
-         <string>Friend Profile:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditSteamProfile</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QLineEdit" name="lineEditSteamProfile">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="labelSteamID64">
-        <property name="text">
-         <string>Friend ID64:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditSteamID64</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="QLineEdit" name="lineEditSteamID64">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="labelLocation">
-        <property name="text">
-         <string>Location (Map):</string>
-        </property>
-        <property name="buddy">
-         <cstring>checkBoxLocationEdit</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QCheckBox" name="checkBoxLocationEdit">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEditLocation">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="labelYourProfile">
-        <property name="text">
-         <string>Your Profile:</string>
-        </property>
-        <property name="buddy">
-         <cstring>comboBoxUsers</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="comboBoxUsers"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelSteamUserdataFolder">
-        <property name="text">
-         <string>Steam  Folder:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditUserdataFolder</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLineEdit" name="lineEditUserdataFolder">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="toolButtonConfirmUserdataFolder">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>OK</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="labelScreenshotFile">
-        <property name="text">
-         <string>Screenshot:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QComboBox" name="comboBoxScreenshotFile">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="labelGame">
-        <property name="text">
-         <string>Game:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QComboBox" name="comboBoxGame">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="1">
+    <item row="9" column="1">
      <widget class="QLabel" name="labelImagePreviewPixel">
       <property name="minimumSize">
        <size>
@@ -270,20 +338,28 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>lineEditUserdataFolder</tabstop>
+  <tabstop>toolButtonConfirmUserdataFolder</tabstop>
   <tabstop>comboBoxUsers</tabstop>
+  <tabstop>comboBoxGame</tabstop>
+  <tabstop>comboBoxScreenshotFile</tabstop>
+  <tabstop>radioButtonFriend</tabstop>
+  <tabstop>comboBoxFriend</tabstop>
+  <tabstop>radioButtonSteamProfile</tabstop>
   <tabstop>lineEditSteamProfile</tabstop>
+  <tabstop>radioButtonSteamID64</tabstop>
   <tabstop>lineEditSteamID64</tabstop>
   <tabstop>checkBoxLocationEdit</tabstop>
   <tabstop>lineEditLocation</tabstop>
   <tabstop>pushButtonRunTagFriend</tabstop>
   <tabstop>pushButtonHelp</tabstop>
   <tabstop>pushButtonAbout</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>pushButtonQuit</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>pushButtonQuit</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>

@@ -42,6 +42,12 @@ private slots:
 
     void on_lineEditSteamProfile_textChanged(const QString &arg1);
 
+    void on_lineEditSteamID64_textChanged(const QString &arg1);
+
+    void on_radioButtonFriend_toggled(bool checked);
+
+    void on_lineEditSteamProfile_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();

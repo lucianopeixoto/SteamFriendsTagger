@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+// TODO: Set Validadors for the Steam ID64, Steam Profile and Games fields.
+
 //#include <QListWidget>
 
 QString findSum(QString str1, QString str2);
@@ -200,6 +202,10 @@ void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
             QMessageBox::critical(this, "Folder not found!", "Userdata \"" + arg1 +"/760/\" folder was not found.\nUnable to continue.");
             ui->comboBoxGame->setDisabled(1);
             ui->comboBoxGame->clear();
+            ui->comboBoxFriend->setDisabled(1);
+            ui->comboBoxFriend->clear();
+            ui->lineEditSteamProfile->setDisabled(true);
+            ui->lineEditSteamProfile->clear();
         }
         else{
             qDebug() << "760: " + userdataFolder760.absolutePath();
@@ -236,7 +242,6 @@ void MainWindow::on_comboBoxUsers_currentIndexChanged(const QString &arg1)
     }
 }
 
-// TODO: Show screenshots thumbnails
 void MainWindow::on_comboBoxGame_currentIndexChanged(const QString &arg1)
 {
     if (arg1 != "." && arg1 != ".." && arg1 != ""){
@@ -269,13 +274,12 @@ void MainWindow::on_comboBoxScreenshotFile_currentIndexChanged(const QString &ar
     screenshotPreviewPath = ui->lineEditUserdataFolder->text() + "userdata/" + ui->comboBoxUsers->currentText() + "/760/remote/" + ui->comboBoxGame->currentText() + "/screenshots/" + arg1;
     qDebug() << "Screenshot Preview: " << screenshotPreviewPath;
     QPixmap screenshotPreviewPixmap(screenshotPreviewPath);
-    ui->labelImagePreviewPixel->setPixmap(screenshotPreviewPixmap.scaled(500, 500, Qt::KeepAspectRatio));
+    ui->labelImagePreviewPixel->setPixmap(screenshotPreviewPixmap.scaled(600, 600, Qt::KeepAspectRatio));
     ui->lineEditLocation->setText(getLocation(&vdfFileString, arg1));
-
-    ui ->lineEditSteamProfile->setEnabled(1);
+    if (arg1 != "") {
+        ui ->lineEditSteamProfile->setEnabled(1);
+    }
 }
-
-
 
 void MainWindow::on_checkBoxLocationEdit_clicked(bool checked)
 {
@@ -291,6 +295,48 @@ void MainWindow::on_checkBoxLocationEdit_clicked(bool checked)
 void MainWindow::on_lineEditSteamProfile_textChanged(const QString &arg1)
 {
     QString steamId64;
-    steamId64 = findSum(arg1, "76561197960265728");
-    ui->lineEditSteamID64->setText(steamId64);
+    if (arg1 != ""){
+        steamId64 = findSum(arg1, "76561197960265728");
+        ui->lineEditSteamID64->setText(steamId64);
+    }
+    else ui->lineEditSteamID64->clear();
 }
+
+void MainWindow::on_lineEditSteamID64_textChanged(const QString &arg1)
+{
+    if (arg1 != ""){
+        ui->pushButtonRunTagFriend->setEnabled(1);
+    }
+    else{
+        ui->pushButtonRunTagFriend->setDisabled(1);
+    }
+}
+
+void MainWindow::on_radioButtonFriend_toggled(bool checked)
+{
+    switch (checked) {
+    case false:
+        ui->comboBoxFriend->setDisabled(true);
+        break;
+    case true:
+        ui->comboBoxFriend->setEnabled(true);
+        // TODO: This part below is just warning the user about future improvements. Remove when friends list implemented
+        QMessageBox::critical(this, "Feature not yet implemented!", "This will allow you to select the profile to be "
+                                                                    "tagged from your steam friends. For now you should "
+                                                                    "use a tool to find your friend\'s Steam ID or Steam "
+                                                                    "ID64 and paste manually below.\n"
+                                                                    "Please, check the \"Help\" section for more info on "
+                                                                    "how to find your friend's ID.");
+        ui->radioButtonSteamProfile->setChecked(true);
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWindow::on_lineEditSteamProfile_textEdited(const QString &arg1)
+{
+
+}
+
+
