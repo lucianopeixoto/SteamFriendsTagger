@@ -10,6 +10,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +49,8 @@ private slots:
     void on_radioButtonFriend_toggled(bool checked);
 
     void on_lineEditSteamProfile_textEdited(const QString &arg1);
+
+    void on_pushButtonHelp_clicked();
 
 private:
     Ui::MainWindow *ui;

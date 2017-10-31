@@ -3,7 +3,6 @@
 
 // TODO: Set Validadors for the Steam ID64, Steam Profile and Games fields.
 
-//#include <QListWidget>
 
 QString findSum(QString str1, QString str2);
 
@@ -31,7 +30,6 @@ MainWindow::~MainWindow()
 }
 
 // Display the about window
-// TODO: About window should be better implemented, with better layout and web links
 void MainWindow::on_pushButtonAbout_clicked()
 {
     QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v0.1\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
@@ -142,7 +140,7 @@ void MainWindow::OpenUserdataFolder(){
     }
 }
 
-// TODO: Get the location name for the selected screenshot from screenshots.vdf
+// Get the location name for the selected screenshot from screenshots.vdf
 QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile){
     qDebug() << "getLocation of screenshot " << screenshotFile << " from file " << vdfFileGlobal.fileName();
     QString screenshotVdfString = "";
@@ -157,7 +155,7 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
     qDebug() << "Screenshot to VDF:\n" << screenshotVdfString;
 
     // If there's a location parameter, get's it, if not, set to the game ID
-    // TODO: Make it set to the game name when available
+    // TODO: Make it set to the game name when available. Don't trust Steam API for that. Some games have wrong names. (See CSGO)
     ui->checkBoxLocationEdit->setEnabled(1);
     if (screenshotVdfString.indexOf("\"location\"", 0 , Qt::CaseInsensitive) != -1){
         // Searshes for a "location" and gets the text after "\t\t\""
@@ -340,3 +338,9 @@ void MainWindow::on_lineEditSteamProfile_textEdited(const QString &arg1)
 }
 
 
+void MainWindow::on_pushButtonHelp_clicked()
+{
+    // TODO: Link to a more specific step-by-step help page when the Wiki becomes more complex.
+    QString link = "https://github.com/lucianopeixoto/SteamFriendsTagger/wiki";
+    QDesktopServices::openUrl(QUrl(link));
+}
