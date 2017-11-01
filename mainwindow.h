@@ -58,6 +58,8 @@ private slots:
 
     void on_lineEditSteamID64_textEdited(const QString &arg1);
 
+    void on_pushButtonSteamRep_clicked();
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();

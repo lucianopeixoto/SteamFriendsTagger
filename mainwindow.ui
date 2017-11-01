@@ -226,6 +226,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonSteamRep">
+          <property name="text">
+           <string>SteamRep</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="11" column="1">
@@ -346,7 +353,6 @@
   <tabstop>radioButtonFriend</tabstop>
   <tabstop>comboBoxFriend</tabstop>
   <tabstop>radioButtonSteamProfile</tabstop>
-  <tabstop>lineEditSteamProfile</tabstop>
   <tabstop>radioButtonSteamID64</tabstop>
   <tabstop>lineEditSteamID64</tabstop>
   <tabstop>checkBoxLocationEdit</tabstop>

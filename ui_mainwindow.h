@@ -59,6 +59,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QRadioButton *radioButtonSteamProfile;
     QLineEdit *lineEditSteamProfile;
+    QPushButton *pushButtonSteamRep;
     QHBoxLayout *horizontalLayout_5;
     QRadioButton *radioButtonSteamID64;
     QLineEdit *lineEditSteamID64;
@@ -223,6 +224,11 @@ public:
 
         horizontalLayout_4->addWidget(lineEditSteamProfile);
 
+        pushButtonSteamRep = new QPushButton(centralWidget);
+        pushButtonSteamRep->setObjectName(QStringLiteral("pushButtonSteamRep"));
+
+        horizontalLayout_4->addWidget(pushButtonSteamRep);
+
 
         formLayoutMainForm->setLayout(9, QFormLayout::FieldRole, horizontalLayout_4);
 
@@ -312,8 +318,7 @@ public:
         QWidget::setTabOrder(comboBoxScreenshotFile, radioButtonFriend);
         QWidget::setTabOrder(radioButtonFriend, comboBoxFriend);
         QWidget::setTabOrder(comboBoxFriend, radioButtonSteamProfile);
-        QWidget::setTabOrder(radioButtonSteamProfile, lineEditSteamProfile);
-        QWidget::setTabOrder(lineEditSteamProfile, radioButtonSteamID64);
+        QWidget::setTabOrder(radioButtonSteamProfile, radioButtonSteamID64);
         QWidget::setTabOrder(radioButtonSteamID64, lineEditSteamID64);
         QWidget::setTabOrder(lineEditSteamID64, checkBoxLocationEdit);
         QWidget::setTabOrder(checkBoxLocationEdit, lineEditLocation);
@@ -344,6 +349,7 @@ public:
         labelLocation->setText(QApplication::translate("MainWindow", "Location (Map):", Q_NULLPTR));
         checkBoxLocationEdit->setText(QString());
         radioButtonSteamProfile->setText(QString());
+        pushButtonSteamRep->setText(QApplication::translate("MainWindow", "SteamRep", Q_NULLPTR));
         radioButtonSteamID64->setText(QString());
         pushButtonQuit->setText(QApplication::translate("MainWindow", "Quit", Q_NULLPTR));
         pushButtonHelp->setText(QApplication::translate("MainWindow", "Help", Q_NULLPTR));

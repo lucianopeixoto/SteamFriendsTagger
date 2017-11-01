@@ -354,8 +354,8 @@ void MainWindow::on_lineEditSteamProfile_textEdited(const QString &arg1)
 
 void MainWindow::on_pushButtonHelp_clicked()
 {
-    // TODO: Link to a more specific step-by-step help page when the Wiki becomes more complex.
-    QString urlHelp = "https://github.com/lucianopeixoto/SteamFriendsTagger/wiki";
+    // Link to a specific step-by-step help page.
+    QString urlHelp = "https://github.com/lucianopeixoto/SteamFriendsTagger/wiki/Step-by-step-quick-guide";
     QDesktopServices::openUrl(QUrl(urlHelp));
 }
 
@@ -372,4 +372,10 @@ void MainWindow::on_radioButtonSteamID64_toggled(bool checked)
 void MainWindow::on_lineEditSteamID64_textEdited(const QString &arg1)
 {
     ui->lineEditSteamProfile->clear();
+}
+
+void MainWindow::on_pushButtonSteamRep_clicked()
+{
+    QString urlSteamRep = "http://steamrep.com/";
+    QDesktopServices::openUrl(QUrl(urlSteamRep));
 }
