@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 // Display the about window
 void MainWindow::on_pushButtonAbout_clicked()
 {
-    QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v0.1\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
+    QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v0.2\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
 }
 
 // Run the edit on the file for Tagging the desired friend
@@ -104,7 +104,7 @@ void MainWindow::on_toolButtonConfirmUserdataFolder_clicked()
     OpenUserdataFolder();
 }
 
-// On text for the userdata path edited, enabke the "Confirm" button.
+// On text for the userdata path edited, enable the "Confirm" button.
 
 void MainWindow::on_lineEditUserdataFolder_textEdited(const QString &arg1)
 {
@@ -176,19 +176,19 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
     return location;
 }
 
-void MainWindow::writeScreenshotString(QFile *vdfFileLocal, QString vdfStringLocal)
+void MainWindow::writeScreenshotString()
 {
     vdfFileGlobal.close();
     vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
     if (!vdfFileGlobal.open(QIODevice::ReadWrite | QIODevice::Text))
-        QMessageBox::critical(this, "File not found!", "File was not found!");
+        QMessageBox::critical(this, "File not found!", "\"screenshots.vdf\" file was not found on \"" + userdataFolder760.absolutePath() + "\".");
     else{
         QTextStream vdfFileStream(&vdfFileGlobal);
         vdfFileString = vdfFileStream.readAll();
-        qDebug() << vdfFileString;
+        //qDebug() << vdfFileString;
     }
-    vdfFileGlobal.close();
 
+    vdfFileGlobal.close();
 }
 
 // TODO: Load games names using SteamAPI, other site or a local text file with most games
@@ -312,23 +312,16 @@ void MainWindow::on_lineEditSteamID64_textChanged(const QString &arg1)
 
 void MainWindow::on_radioButtonFriend_toggled(bool checked)
 {
-    switch (checked) {
-    case false:
-        ui->comboBoxFriend->setDisabled(true);
-        break;
-    case true:
-        ui->comboBoxFriend->setEnabled(true);
+    ui->comboBoxFriend->setEnabled(checked);
+    if(checked){
         // TODO: This part below is just warning the user about future improvements. Remove when friends list implemented
-        QMessageBox::critical(this, "Feature not yet implemented!", "This will allow you to select the profile to be "
+        QMessageBox::critical(this, "Feature not implemented yet!", "This will allow you to select the profile to be "
                                                                     "tagged from your steam friends. For now you should "
                                                                     "use a tool to find your friend\'s Steam ID or Steam "
                                                                     "ID64 and paste manually below.\n"
                                                                     "Please, check the \"Help\" section for more info on "
                                                                     "how to find your friend's ID.");
         ui->radioButtonSteamProfile->setChecked(true);
-        break;
-    default:
-        break;
     }
 }
 
@@ -341,6 +334,16 @@ void MainWindow::on_lineEditSteamProfile_textEdited(const QString &arg1)
 void MainWindow::on_pushButtonHelp_clicked()
 {
     // TODO: Link to a more specific step-by-step help page when the Wiki becomes more complex.
-    QString link = "https://github.com/lucianopeixoto/SteamFriendsTagger/wiki";
-    QDesktopServices::openUrl(QUrl(link));
+    QString urlHelp = "https://github.com/lucianopeixoto/SteamFriendsTagger/wiki";
+    QDesktopServices::openUrl(QUrl(urlHelp));
+}
+
+void MainWindow::on_radioButtonSteamProfile_toggled(bool checked)
+{
+    ui->lineEditSteamProfile->setEnabled(checked);
+}
+
+void MainWindow::on_radioButtonSteamID64_toggled(bool checked)
+{
+    ui->lineEditSteamID64->setEnabled(checked);
 }

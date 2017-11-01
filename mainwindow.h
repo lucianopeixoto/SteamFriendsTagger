@@ -52,11 +52,15 @@ private slots:
 
     void on_pushButtonHelp_clicked();
 
+    void on_radioButtonSteamProfile_toggled(bool checked);
+
+    void on_radioButtonSteamID64_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
     QString getLocation(QString* vdfStringLocal, QString screenshotFile);
-    void writeScreenshotString(QFile* vdfFileLocal, QString vdfStringLocal);
+    void writeScreenshotString();
 };
 
 #endif // MAINWINDOW_H
