@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 // Display the about window
 void MainWindow::on_pushButtonAbout_clicked()
 {
-    QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v0.2\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
+    QMessageBox::about(this, "About SFT", "SFT - Steam Friends Tagger v1.0\nhttps://github.com/lucianopeixoto/SteamFriendsTagger\nCreated by Luciano Peixoto\nlucianopeixoto@hotmail.com");
 }
 
 // Run the edit on the file for Tagging the desired friend
