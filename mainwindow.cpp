@@ -36,12 +36,12 @@ void MainWindow::on_pushButtonAbout_clicked()
 }
 
 // Run the edit on the file for Tagging the desired friend
+
 void MainWindow::on_pushButtonRunTagFriend_clicked()
 {
-    //unsigned long int steamId32 = (1 + ui->lineEditSteamProfile->text().toInt()); //descobrir como somar 64bits
-    QString steamId64;
-    steamId64 = findSum(ui->lineEditSteamProfile->text(), "76561197960265728");
-    ui->lineEditSteamID64->setText(steamId64);
+    // TODO: Do the validation before running this
+    writeScreenshotString(ui->lineEditSteamID64->text(), ui->comboBoxScreenshotFile->currentText(), ui->lineEditLocation->text());
+    QMessageBox::information(this, "Done!", "The informed profile was tagged. Please restart Steam application and upload your file as usual.");
 }
 
 // Function for finding sum of larger numbers
@@ -176,19 +176,40 @@ QString MainWindow::getLocation(QString * vdfStringLocal, QString screenshotFile
     return location;
 }
 
-void MainWindow::writeScreenshotString()
+void MainWindow::writeScreenshotString(QString steamProfile, QString screenshotFile, QString location)
 {
     vdfFileGlobal.close();
     vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
-    if (!vdfFileGlobal.open(QIODevice::ReadWrite | QIODevice::Text))
+    if (!vdfFileGlobal.open(QIODevice::ReadOnly | QIODevice::Text))
         QMessageBox::critical(this, "File not found!", "\"screenshots.vdf\" file was not found on \"" + userdataFolder760.absolutePath() + "\".");
     else{
         QTextStream vdfFileStream(&vdfFileGlobal);
         vdfFileString = vdfFileStream.readAll();
         //qDebug() << vdfFileString;
+        vdfFileGlobal.close();
     }
 
-    vdfFileGlobal.close();
+    // TODO: Make it insert after screenshot name instead of "imported 1"
+    vdfFileString.insert(
+        vdfFileString.indexOf("\"imported\"", vdfFileString.indexOf(screenshotFile)) + 16,
+        "\t\t\t\"location\"\t\t\"" + location + "\"\n"
+        "\t\t\t\"taggedusers\"\n"
+        "\t\t\t{\n"
+        "\t\t\t\t\"0\"\t\t\"" + steamProfile + "\"\n"
+        "\t\t\t}\n"
+        "\t\t\t\"caption\"\t\t\"Tagged with SFT (https://github.com/lucianopeixoto/SteamFriendsTagger)\"\n"
+        "\t\t\t\"hscreenshot\"\t\t\"1234567890\"\n"
+
+    );
+
+    vdfFileGlobal.setFileName(userdataFolder760.absoluteFilePath("screenshots.vdf"));
+    if (!vdfFileGlobal.open(QIODevice::WriteOnly))
+        QMessageBox::critical(this, "Unable to open file!", "It was not possible to write in \"screenshots.vdf\".");
+    else{
+        QTextStream vdfFileStream(&vdfFileGlobal);
+        vdfFileStream << vdfFileString;
+        vdfFileGlobal.close();
+    }
 }
 
 // TODO: Load games names using SteamAPI, other site or a local text file with most games
@@ -327,7 +348,7 @@ void MainWindow::on_radioButtonFriend_toggled(bool checked)
 
 void MainWindow::on_lineEditSteamProfile_textEdited(const QString &arg1)
 {
-
+    ui->comboBoxFriend->setCurrentIndex(-1);
 }
 
 
@@ -346,4 +367,9 @@ void MainWindow::on_radioButtonSteamProfile_toggled(bool checked)
 void MainWindow::on_radioButtonSteamID64_toggled(bool checked)
 {
     ui->lineEditSteamID64->setEnabled(checked);
+}
+
+void MainWindow::on_lineEditSteamID64_textEdited(const QString &arg1)
+{
+    ui->lineEditSteamProfile->clear();
 }

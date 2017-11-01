@@ -56,11 +56,13 @@ private slots:
 
     void on_radioButtonSteamID64_toggled(bool checked);
 
+    void on_lineEditSteamID64_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void OpenUserdataFolder();
     QString getLocation(QString* vdfStringLocal, QString screenshotFile);
-    void writeScreenshotString();
+    void writeScreenshotString(QString steamProfile, QString screenshotFile, QString location);
 };
 
 #endif // MAINWINDOW_H
